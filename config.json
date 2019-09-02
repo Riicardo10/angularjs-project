@@ -1,0 +1,9 @@
+{
+    "version": "1.0.0-ALPHA",
+    "applicative": "Invoice",
+    "initials": "INV",
+    "author": "Ricardo Flores",
+    "year": 2019,
+    "web": "http://www.ricardoflores.com",
+    "corp": "RedPoint"
+}
