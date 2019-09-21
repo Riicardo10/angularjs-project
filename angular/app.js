@@ -1,11 +1,19 @@
 var app = angular.module( 'invoiceApp', [ 
     'ngRoute',
-    'invoiceApp.config'
+    'invoiceApp.config',
+    'invoiceApp.messages',
+    'invoiceApp.notifications'
 ]);
 
-app.controller( 'mainCtrl', ['$scope', 'Config', function($scope, Config) {
-    console.log("App Start")
+app.controller( 'mainCtrl', ['$scope', 'Config', 'Messages', 'Notifications', function($scope, Config, Messages, Notifications) {
+    console.log("App Start by Ricardo Flores")
     $scope.config = {};
+    $scope.messages = Messages.messages;
+    $scope.notifications = Notifications.notifications;
+
+    
+    console.log($scope.messages);
+    console.log($scope.notifications);
 
     $scope.user = {
         name: "Ricardo Flores"
@@ -44,3 +52,12 @@ app.filter( 'removeLetter', function() {
         return word;
     }
 } )
+app.filter( 'smartMessage', function() {
+    return function( message ) {
+        if( message.length > 20 ) {
+            return message.substr(0, 32) + "...";
+        }
+        return message;
+    }
+} )
+
