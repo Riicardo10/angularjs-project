@@ -2,7 +2,9 @@ var app = angular.module( 'invoiceApp', [
     'ngRoute',
     'invoiceApp.config',
     'invoiceApp.messages',
-    'invoiceApp.notifications'
+    'invoiceApp.notifications',
+    'invoiceApp.customersCtrl',
+    'invoiceApp.dashboardCtrl'
 ]);
 
 app.controller( 'mainCtrl', ['$scope', 'Config', 'Messages', 'Notifications', function($scope, Config, Messages, Notifications) {
@@ -11,22 +13,30 @@ app.controller( 'mainCtrl', ['$scope', 'Config', 'Messages', 'Notifications', fu
     $scope.messages = Messages.messages;
     $scope.notifications = Notifications.notifications;
 
-    
-    console.log($scope.messages);
-    console.log($scope.notifications);
-
     $scope.user = {
         name: "Ricardo Flores"
     }
 
-    Config.load().then(
+    Config.load().then( 
         function() {
             $scope.config = Config.config;
-        },
-        function( err ) {
+        }, function( err ) {
             console.log( err )
         }
     )
+
+    $scope.active = function(menu, submenu) {
+        $scope.menuDashboard = "";
+        $scope.menuCustomers = "";
+
+        $scope[menu] = 'active';
+    }
+
+    $scope.setTitleAndDescription = function( title, description ){
+        $scope.title = title;
+        $scope.description = description;
+    }
+
 } ] );
 
 // ============================
@@ -35,7 +45,12 @@ app.controller( 'mainCtrl', ['$scope', 'Config', 'Messages', 'Notifications', fu
 app.config( [ '$routeProvider', function( $routeProvider ) {
     $routeProvider
         .when( '/', {
-            templateUrl: 'dashboard/dashboard.html'
+            templateUrl: 'dashboard/dashboard.view.html',
+            controller: 'dashboardCtrl'
+        } )
+        .when( '/customers', {
+            templateUrl: 'customers/customers.view.html',
+            controller: 'customersCtrl'
         } )
         .otherwise( {
             redirectTo: '/'

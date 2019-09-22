@@ -31,12 +31,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="dist/css/animate.css">
+
     <!-- Angularjs imports -->
     <script src="angular/lib/angular.min.js"></script>
     <script src="angular/lib/angular-route.min.js"></script>
     
     <!-- Controllers -->
     <script src="angular/app.js"></script>
+    <script src="angular/controllers/customers.controller.js"></script>
+    <script src="angular/controllers/dashboard.controller.js"></script>
 
     <!-- Services -->
     <script src="angular/services/config.service.js"></script>
@@ -105,8 +110,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Page Header
-            <small>Optional description</small>
+            {{ title }}
+            <small> {{ description }} </small>
           </h1>
         </section>
 
