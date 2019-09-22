@@ -12,9 +12,9 @@
 class Database{
 
 	private $_connection;
-	private $_host = "localhost";
-	private $_user = "facturacion_user";
-	private $_pass = "123456";
+	private $_host = "127.0.0.1";
+	private $_user = "root";
+	private $_pass = "ricardo";
 	private $_db   = "facturacion_db";
 
 

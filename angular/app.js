@@ -2,12 +2,13 @@ var app = angular.module( 'invoiceApp', [
     'ngRoute',
     'invoiceApp.config',
     'invoiceApp.messages',
+    'invoiceApp.customers',
     'invoiceApp.notifications',
     'invoiceApp.customersCtrl',
     'invoiceApp.dashboardCtrl'
 ]);
 
-app.controller( 'mainCtrl', ['$scope', 'Config', 'Messages', 'Notifications', function($scope, Config, Messages, Notifications) {
+app.controller( 'mainCtrl', ['$scope', 'Config', 'Messages', 'Notifications', 'Customers', function($scope, Config, Messages, Notifications, Customers) {
     console.log("App Start by Ricardo Flores")
     $scope.config = {};
     $scope.messages = Messages.messages;
@@ -48,7 +49,7 @@ app.config( [ '$routeProvider', function( $routeProvider ) {
             templateUrl: 'dashboard/dashboard.view.html',
             controller: 'dashboardCtrl'
         } )
-        .when( '/customers', {
+        .when( '/customers/:page', {
             templateUrl: 'customers/customers.view.html',
             controller: 'customersCtrl'
         } )
