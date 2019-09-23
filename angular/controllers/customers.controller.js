@@ -4,6 +4,8 @@ app.controller( 'customersCtrl', [ '$scope', 'Customers', '$routeParams', functi
 
     var page = $routeParams.page;
 
+    $scope.customer = {};
+
     $scope.active('menuCustomers');
     $scope.setTitleAndDescription('Customers', 'Customers information');
 
@@ -16,5 +18,10 @@ app.controller( 'customersCtrl', [ '$scope', 'Customers', '$routeParams', functi
     }
 
     $scope.moveTo(page);
+
+    $scope.showModal = function( customer ) {
+        $('#modal-customer').modal();
+        angular.copy(customer, $scope.customer);
+    }
 
 } ] )
