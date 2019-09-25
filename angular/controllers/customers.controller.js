@@ -24,4 +24,13 @@ app.controller( 'customersCtrl', [ '$scope', 'Customers', '$routeParams', functi
         angular.copy(customer, $scope.customer);
     }
 
+    $scope.save = function( customer, formCustomer ) {
+        console.log("save")
+        Customers.saveCustomer( customer ).then( function() {
+            $('#modal-customer').modal('hide');
+            formCustomer.autoValidateFormOptions.resetForm();
+            $scope.customer = {}
+        } );
+    }
+
 } ] )

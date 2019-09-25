@@ -29,6 +29,15 @@ app.factory( 'Customers', [ '$http', '$q', function( $http, $q ) {
                     return d.resolve();
                 } )
             return d.promise;
+        },
+        saveCustomer    : function( customer,  ) {
+            var d = $q.defer();
+            $http.post( "php/customers/post.customer.php", customer)
+                .then( function(res) {
+                    self.loadCustomers(self.pag_actual);
+                    return d.resolve();
+                } )
+            return d.promise;
         }
     }
     return self;

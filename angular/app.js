@@ -1,5 +1,6 @@
 var app = angular.module( 'invoiceApp', [ 
     'ngRoute',
+    'jcs-autoValidate',
     'invoiceApp.config',
     'invoiceApp.messages',
     'invoiceApp.customers',
@@ -7,6 +8,16 @@ var app = angular.module( 'invoiceApp', [
     'invoiceApp.customersCtrl',
     'invoiceApp.dashboardCtrl'
 ]);
+
+angular.module('jcs-autoValidate')
+    .run([
+        'defaultErrorMessageResolver',
+        function (defaultErrorMessageResolver) {
+            // To change the root resource file path
+            defaultErrorMessageResolver.setI18nFileRootPath('angular/lib/');
+            defaultErrorMessageResolver.setCulture('es-co');
+        }
+    ]);
 
 app.controller( 'mainCtrl', ['$scope', 'Config', 'Messages', 'Notifications', 'Customers', function($scope, Config, Messages, Notifications, Customers) {
     console.log("App Start by Ricardo Flores")
