@@ -1,3 +1,14 @@
+<?php
+
+  session_start();
+
+  if( !isset( $_SESSION[ "user" ] ) ) {
+    echo "Access denied.";
+    die;
+  }
+
+?>
+
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -43,12 +54,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="angular/app.js"></script>
     <script src="angular/controllers/customers.controller.js"></script>
     <script src="angular/controllers/dashboard.controller.js"></script>
+    <script src="angular/controllers/invoices.controller.js"></script>
 
     <!-- Services -->
     <script src="angular/services/config.service.js"></script>
     <script src="angular/services/messages.service.js"></script>
     <script src="angular/services/notifications.service.js"></script>
-    <script src="angular/services/customers.services.js"></script>
+    <script src="angular/services/customers.service.js"></script>
+    <script src="angular/services/invoice.service.js"></script>
 
   </head>
   <!--

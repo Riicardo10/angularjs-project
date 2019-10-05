@@ -4,9 +4,11 @@ var app = angular.module( 'invoiceApp', [
     'invoiceApp.config',
     'invoiceApp.messages',
     'invoiceApp.customers',
+    'invoiceApp.invoice',
     'invoiceApp.notifications',
     'invoiceApp.customersCtrl',
-    'invoiceApp.dashboardCtrl'
+    'invoiceApp.dashboardCtrl',
+    'invoiceApp.invoiceCtrl'
 ]);
 
 angular.module('jcs-autoValidate')
@@ -40,6 +42,7 @@ app.controller( 'mainCtrl', ['$scope', 'Config', 'Messages', 'Notifications', 'C
     $scope.active = function(menu, submenu) {
         $scope.menuDashboard = "";
         $scope.menuCustomers = "";
+        $scope.menuInvoices = "";
 
         $scope[menu] = 'active';
     }
@@ -50,6 +53,25 @@ app.controller( 'mainCtrl', ['$scope', 'Config', 'Messages', 'Notifications', 'C
     }
 
 } ] );
+
+// ============================
+//      Directivas
+// ============================
+
+app.directive('enterKey', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.enterKey);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
+
 
 // ============================
 //      Routes
@@ -63,6 +85,13 @@ app.config( [ '$routeProvider', function( $routeProvider ) {
         .when( '/customers/:page', {
             templateUrl: 'customers/customers.view.html',
             controller: 'customersCtrl'
+        } )
+        .when( '/invoices', {
+            templateUrl: 'invoices/invoices.view.html',
+        } )
+        .when( '/invoice', {
+            templateUrl: 'invoices/invoice.new.view.html',
+            controller: 'invoiceCtrl'
         } )
         .otherwise( {
             redirectTo: '/'

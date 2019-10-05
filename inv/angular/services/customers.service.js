@@ -38,7 +38,25 @@ app.factory( 'Customers', [ '$http', '$q', function( $http, $q ) {
                     return d.resolve();
                 } )
             return d.promise;
-        }
+        },
+        search: function( param ){
+
+			var d = $q.defer();
+
+			self.loading = true;
+
+			$http.post('php/customers/get.customer.search.php?p=' + param )
+				.then(function( res ){
+                    console.log(res.data.clientes)
+					self.loading = false;
+                    self.customers = res.data.clientes;
+					d.resolve();
+
+				});
+
+			return d.promise;
+
+		},
     }
     return self;
 } ] )
